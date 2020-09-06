@@ -13,15 +13,15 @@ variable "key" {
 variable "size" {
   description = "EC2 instance type."
   type        = string
-  default     = "t3.nano"
+  default     = "t3.small"
 }
 
-/*
-variable "sg" {
+
+variable "security_groups" {
   description = "EC2 instance security groups."
-  type        = string
+  type        = list
+  default     = []
 }
-*/
 
 variable "subnet" {
   description = "EC2 instance subnet id"

@@ -24,9 +24,11 @@ locals {
 // Provision scripts
 
 locals {
-  bootstrap_script_default   = templatefile("${path.module}/templates/bootstrap-default.sh", {})
-  bootstrap_script_ssm_agent = templatefile("${path.module}/templates/bootstrap-ssm-agent.sh", {})
-  bootstrap_script_aws_cli   = templatefile("${path.module}/templates/bootstrap-aws-cli.sh", {})
+  bootstrap_script_default     = templatefile("${path.module}/templates/bootstrap-default.sh", {})
+  bootstrap_script_ssm_agent   = templatefile("${path.module}/templates/bootstrap-ssm-agent.sh", {})
+  bootstrap_script_aws_cli     = templatefile("${path.module}/templates/bootstrap-aws-cli.sh", {})
+  bootstrap_script_code_deploy = templatefile("${path.module}/templates/bootstrap-code-deploy.sh", {})
+  bootstrap_script_inspector   = templatefile("${path.module}/templates/bootstrap-inspector.sh", {})
 }
 
 // Multipart config
@@ -54,10 +56,23 @@ data "template_cloudinit_config" "main" {
   }
 
   part {
-    filename     = "ud_script_awscli"
+    filename     = "ud_script_aws_cli"
     content_type = "text/x-shellscript"
     content      = local.bootstrap_script_aws_cli
   }
+
+  part {
+    filename     = "ud_script_code_deploy"
+    content_type = "text/x-shellscript"
+    content      = local.bootstrap_script_code_deploy
+  }
+
+  part {
+    filename     = "ud_script_inspector"
+    content_type = "text/x-shellscript"
+    content      = local.bootstrap_script_inspector
+  }
+
 }
 
 // Final userdata script

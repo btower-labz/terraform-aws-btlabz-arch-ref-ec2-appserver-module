@@ -16,13 +16,11 @@ resource "aws_instance" "main" {
   key_name                = var.key
   monitoring              = false
 
-  iam_instance_profile    = aws_iam_instance_profile.main.name
+  iam_instance_profile = aws_iam_instance_profile.main.name
 
   source_dest_check = true
 
-  //vpc_security_group_ids = [
-  //  "${data.terraform_remote_state.sec.nat_sg}",
-  //]
+  vpc_security_group_ids = var.security_groups
 
   subnet_id = var.subnet
 
@@ -31,8 +29,8 @@ resource "aws_instance" "main" {
   # Prevent destroy on user data change.
   lifecycle {
     ignore_changes = [
-      user_data,
-      ami,
+      #user_data,
+      #ami,
     ]
 
     // prevent_destroy = true

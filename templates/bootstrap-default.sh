@@ -15,8 +15,8 @@ function log {
 
 log 'Started ...'
 
-apt-get update --assume-yes
-apt-get upgrade --assume-yes
-apt-get install --assume-yes nfs-common unzip autofs jq dnsutils hostname mc tcpdump wget screen parted rsync
+# See: https://aws.amazon.com/premiumsupport/knowledge-center/ec2-install-extras-library-software/
+yum install -y amazon-linux-extras
+yum clean metadata && yum install mc tcpdump wget screen parted rsync
 
 log 'Finished ...'
