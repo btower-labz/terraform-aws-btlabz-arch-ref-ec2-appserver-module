@@ -16,7 +16,7 @@ resource "aws_instance" "main" {
   key_name                = var.key
   monitoring              = false
 
-  iam_instance_profile    = "${aws_iam_instance_profile.main.name}"
+  iam_instance_profile    = aws_iam_instance_profile.main.name
 
   source_dest_check = true
 
@@ -35,7 +35,7 @@ resource "aws_instance" "main" {
       ami,
     ]
 
-    prevent_destroy = true
+    // prevent_destroy = true
   }
 
   # Prevent automated deletion.
