@@ -15,8 +15,7 @@ function log {
 
 log 'Started ...'
 
-# See: https://aws.amazon.com/premiumsupport/knowledge-center/ec2-install-extras-library-software/
-yum install -y amazon-linux-extras
-yum clean metadata && yum install mc tcpdump wget screen parted rsync
+id
+ls -la
 
 log 'Finished ...'

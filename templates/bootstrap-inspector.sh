@@ -14,13 +14,6 @@ function log {
 
 log 'Started ...'
 
-# See: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_installing-uninstalling-agents.html
-
-cd /tmp
-curl -O https://inspector-agent.amazonaws.com/linux/latest/install
-bash install
-
-# TODO: Verify signatore
-#See: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_verify-sig-agent-download-linux.html
+echo 'inspector ...'
 
 log 'Finished ...'
