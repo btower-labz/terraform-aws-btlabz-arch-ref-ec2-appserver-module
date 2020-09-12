@@ -29,6 +29,7 @@ locals {
   bootstrap_script_aws_cli     = templatefile("${path.module}/templates/bootstrap-aws-cli.sh", {})
   bootstrap_script_code_deploy = templatefile("${path.module}/templates/bootstrap-code-deploy.sh", {})
   bootstrap_script_inspector   = templatefile("${path.module}/templates/bootstrap-inspector.sh", {})
+  bootstrap_script_wildfly     = templatefile("${path.module}/templates/bootstrap-wildfly.sh", {})
 }
 
 // Multipart config
@@ -71,6 +72,12 @@ data "template_cloudinit_config" "main" {
     filename     = "ud_script_inspector"
     content_type = "text/x-shellscript"
     content      = local.bootstrap_script_inspector
+  }
+
+  part {
+    filename     = "ud_script_wildfly"
+    content_type = "text/x-shellscript"
+    content      = local.bootstrap_script_wildfly
   }
 
 }

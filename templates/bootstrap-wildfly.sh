@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-# TODO: get rid of double $
-
 set -o nounset
 set -o noclobber
 set -o errexit
 set -o pipefail
 
 BASENAME=$(basename "$${0}")
+
 function log {
   local MESSAGE=$${1}
   echo "$${BASENAME}: $${MESSAGE}"
@@ -16,6 +15,8 @@ function log {
 
 log 'Started ...'
 
-aws --version
+systemctl enable wildfly
+systemctl start wildfly
+systemctl status wildfly
 
 log 'Finished ...'

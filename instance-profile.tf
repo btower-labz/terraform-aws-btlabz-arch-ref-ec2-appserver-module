@@ -1,13 +1,13 @@
 variable "amazon_ssm_managed_instance_core" {
-  type = bool
+  type        = bool
   description = "Enable AmazonSSMManagedInstanceCore managed policy"
-  default = true
+  default     = true
 }
 
 variable "cloud_watch_agent_server_policy" {
-  type = bool
+  type        = bool
   description = "Enable CloudWatchAgentServerPolicy managed policy"
-  default = true
+  default     = true
 }
 
 resource "aws_iam_instance_profile" "main" {
@@ -21,13 +21,13 @@ resource "aws_iam_role" "main" {
 }
 
 resource "aws_iam_role_policy_attachment" "amazon_ssm_managed_instance_core" {
-  count      = var.amazon_ssm_managed_instance_core?1:0
+  count      = var.amazon_ssm_managed_instance_core ? 1 : 0
   role       = aws_iam_role.main.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
 resource "aws_iam_role_policy_attachment" "cloud_watch_agent_server_policy" {
-  count      = var.cloud_watch_agent_server_policy?1:0
+  count      = var.cloud_watch_agent_server_policy ? 1 : 0
   role       = aws_iam_role.main.name
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 }
