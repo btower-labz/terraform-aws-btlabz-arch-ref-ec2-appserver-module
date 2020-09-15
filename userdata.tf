@@ -30,6 +30,11 @@ locals {
   bootstrap_script_code_deploy = templatefile("${path.module}/templates/bootstrap-code-deploy.sh", {})
   bootstrap_script_inspector   = templatefile("${path.module}/templates/bootstrap-inspector.sh", {})
   bootstrap_script_wildfly     = templatefile("${path.module}/templates/bootstrap-wildfly.sh", {})
+  bootstrap_script_secrets = templatefile("${path.module}/templates/bootstrap-secrets.sh", {
+    api_url         = format("%s/api-url", var.config_path)
+    api_key         = format("%s/api-key", var.config_path)
+    database_secret = format("%s/database", var.config_path)
+  })
 }
 
 // Multipart config
@@ -78,6 +83,12 @@ data "template_cloudinit_config" "main" {
     filename     = "ud_script_wildfly"
     content_type = "text/x-shellscript"
     content      = local.bootstrap_script_wildfly
+  }
+
+  part {
+    filename     = "ud_script_secrets"
+    content_type = "text/x-shellscript"
+    content      = local.bootstrap_script_secrets
   }
 
 }

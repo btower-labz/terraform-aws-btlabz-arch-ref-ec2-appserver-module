@@ -16,6 +16,11 @@ variable "size" {
   default     = "t3.small"
 }
 
+variable "config_path" {
+  description = "Configuration path for SSM and Secrets"
+  type        = string
+  default     = "/dev"
+}
 
 variable "security_groups" {
   description = "EC2 instance security groups."
